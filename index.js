@@ -24,8 +24,10 @@ newman.run({
   let results = {
     assertions: summary.run.stats.assertions,
   }
-  axios.post('https://test-server-rho.now.sh/api/accept-results', {
+
+  axios.post('https://test-server-git-firestore.fenskexyz.now.sh/api/accept-results', {
     user: userId,
+    challenge: summary.collection.name,
     results: results
   })
     .then(function (response) {
