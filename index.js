@@ -4,7 +4,7 @@ const axios = require('axios');
 const newman = require('newman'); // require newman in your project
 
 //TODO: For tomorrow
-// Send basic challenge stats 5 mins
+// DONE: Send basic challenge stats 5 mins
 // Make the script accept a api_key as a param. 10 mins
 // Publish an rpm 20 mins.
 
@@ -25,24 +25,16 @@ newman.run({
   let executions = summary.run.executions.map(transformExecution);
 
   let results = {
-    stats: summary.run.stats,
-    timings: summary.run.timings,
-    executions: executions
+    assertions: summary.run.stats.assertions,
   }
   axios.post('https://test-server-rho.now.sh/api/accept-results', {
-    user: 'a953aa85-9fe3-4d88-a66f-397875f42bde',
+    user: 'd65b84c0-e773-495e-9529-c2fe4d5fd56e',
     results: results
   })
     .then(function (response) {
-      console.log("Here comes the response: 🏄")
-      console.log(response);
     })
     .catch(function (error) {
-      console.log(error);
     });
-  // Use token
-
-  console.log(JSON.stringify(results));
 });
 
 function transformExecution(exec) {
