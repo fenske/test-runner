@@ -5,7 +5,7 @@ const newman = require('newman'); // require newman in your project
 
 //TODO: For tomorrow
 // DONE: Send basic challenge stats 5 mins
-// Make the script accept a api_key as a param. 10 mins
+// DONE: Make the script accept a api_key as a param. 10 mins
 // Publish an rpm 20 mins.
 
 
@@ -18,6 +18,9 @@ const newman = require('newman'); // require newman in your project
 // - Add description to each test. Use name as a human readable identifier, e.g. scenario-1-update-and-fetch-balance. Use it to bind the test definition coming
 // from the collection part of the summary with the corresponding execution
 // 3. Publish an rpm 20 mins
+
+let userId = process.argv[2];
+
 newman.run({
   collection: require('./api-tests.json'),
   reporters: 'cli'
@@ -28,7 +31,7 @@ newman.run({
     assertions: summary.run.stats.assertions,
   }
   axios.post('https://test-server-rho.now.sh/api/accept-results', {
-    user: 'd65b84c0-e773-495e-9529-c2fe4d5fd56e',
+    user: userId,
     results: results
   })
     .then(function (response) {
