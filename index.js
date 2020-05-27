@@ -3,12 +3,6 @@ const axios = require('axios');
 
 const newman = require('newman'); // require newman in your project
 
-//TODO: For tomorrow
-// DONE: Send basic challenge stats 5 mins
-// DONE: Make the script accept a api_key as a param. 10 mins
-// Publish an rpm 20 mins.
-
-
 //TODO: Next iteration
 // 0. Super quickly, 10 mins. Understand whether you can run against a remote collection.
 // 1. Identify what parts of the test summary should be sent. 10 mins.
