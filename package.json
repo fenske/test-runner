@@ -1,13 +1,14 @@
 {
-  "name": "test-runner",
-  "version": "1.0.0",
-  "description": "",
+  "name": "coreskills",
+  "version": "1.0.1",
+  "description": "Test utility to run and publish test results for CoreSkills",
   "main": "index.js",
+  "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anton Fenske",
   "license": "ISC",
   "dependencies": {
     "analytics-node": "^3.4.0-beta.1",
