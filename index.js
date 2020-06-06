@@ -3,6 +3,9 @@ const axios = require('axios');
 
 const newman = require('newman'); // require newman in your project
 
+const core = require('@actions/core');
+const github = require('@actions/github');
+
 //TODO: Next iteration
 // 0. Super quickly, 10 mins. Understand whether you can run against a remote collection.
 // 1. Identify what parts of the test summary should be sent. 10 mins.
@@ -13,28 +16,38 @@ const newman = require('newman'); // require newman in your project
 // from the collection part of the summary with the corresponding execution
 // 3. Publish an rpm 20 mins
 
-let userId = process.argv[2];
+try {
+  // `who-to-greet` input defined in action metadata file
+  let userId = core.getInput('access-key');
 
-newman.run({
-  collection: require('./api-tests.json'),
-  reporters: 'cli'
-}, function (err, summary) {
-  let executions = summary.run.executions.map(transformExecution);
+  newman.run({
+    collection: require('./api-tests.json'),
+    reporters: 'cli'
+  }, function (err, summary) {
+    let executions = summary.run.executions.map(transformExecution);
 
-  let results = {
-    assertions: summary.run.stats.assertions,
-  }
+    let results = {
+      assertions: summary.run.stats.assertions,
+    }
 
-  axios.post('https://test-server-git-firestore.fenskexyz.now.sh/api/accept-results', {
-    user: userId,
-    challenge: summary.collection.name,
-    results: results
-  })
-    .then(function (response) {
+    axios.post('https://test-server-git-firestore.fenskexyz.now.sh/api/accept-results', {
+      user: userId,
+      challenge: summary.collection.name,
+      results: results
     })
-    .catch(function (error) {
-    });
-});
+      .then(function (response) {
+      })
+      .catch(function (error) {
+      });
+  });
+
+  core.setOutput("summary", summary);
+  // Get the JSON webhook payload for the event that triggered the workflow
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  console.log(`The event payload: ${payload}`);
+} catch (error) {
+  core.setFailed(error.message);
+}
 
 function transformExecution(exec) {
   return {

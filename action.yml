@@ -1,0 +1,12 @@
+name: 'CoreSkills Test Runner'
+description: 'Runs tests and submits the results'
+inputs:
+  access-key:  # id of input
+    description: 'Your CoreSkills access key'
+    required: true
+outputs:
+  summary:
+    description: 'The test results'
+runs:
+  using: 'node12'
+  main: 'index.js'

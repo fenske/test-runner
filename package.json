@@ -1,6 +1,6 @@
 {
   "name": "coreskills",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Test utility to run and publish test results for CoreSkills",
   "main": "index.js",
   "bin": "./index.js",
@@ -11,6 +11,8 @@
   "author": "Anton Fenske",
   "license": "ISC",
   "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^3.0.0",
     "analytics-node": "^3.4.0-beta.1",
     "axios": "^0.19.2",
     "newman": "^5.0.0"
