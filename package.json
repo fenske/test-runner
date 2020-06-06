@@ -1,5 +1,5 @@
 {
-  "name": "coreskills",
+  "name": "coreskills-test-runner",
   "version": "1.0.2",
   "description": "Test utility to run and publish test results for CoreSkills",
   "main": "index.js",
